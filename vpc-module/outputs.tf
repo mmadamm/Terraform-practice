@@ -3,7 +3,7 @@ output "vpc_id" {
 }
 
 output "subnet_id" {
-  value = aws_subnet.subnets.id
+  value = [for subnet in aws_subnet.subnets : subnet.id]
 }
 
 output "route_table_id" {
