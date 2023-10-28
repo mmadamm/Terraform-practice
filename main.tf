@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "us-west-2"
+  region = "us-east-1"
   
 }
 
@@ -19,7 +19,7 @@ module "vpc" {
    #variables:
    vpc-cider = "10.16.0.0/16"
    subnets_cidr_blocks = "10.16.0.0/20"
-   azs ="us-west-2d"
+   azs ="us-east-1a"
    
 
 }
@@ -28,6 +28,7 @@ module "efs" {
   source = "./efs-module"
  
   #variables:
+
 
 }
 
