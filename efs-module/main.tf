@@ -1,7 +1,11 @@
 resource "aws_security_group" "efs_security_group" {
   name        = "efs-security-group"
   description = "Security group for EFS"
-  vpc_id        = var.vpc-id
+  vpc_id      = var.vpc-id
+
+  tags = {
+      name="${locals.name}-efs-SG"
+    }
 
 
  ingress {
@@ -26,6 +30,9 @@ resource "aws_efs_file_system" "efs" {
   performance_mode       = "generalPurpose"
   throughput_mode        = "bursting"
   encrypted              = true
+  tags = {
+      name="${locals.name}-EFS"
+    }
 }
 
 

@@ -21,6 +21,11 @@ resource "aws_security_group" "launch-security_group" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
+
+
+  tags = {
+      name="${locals.name}-ec2-SG"
+    }
 }
 
 data "template_file" "user_data_template" {
@@ -40,19 +45,25 @@ resource "aws_launch_template" "ec2-launch-temp" {
     vpc_security_group_ids  = [aws_security_group.launch-security_group.id]
 
     user_data = base64encode(data.template_file.user_data_template.rendered) 
+
+    tags = {
+      name="${locals.name}-luanch-template"
+    }
   
 }
 
-# Auta scaling group 
+# Auto scaling group 
 
 resource "aws_autoscaling_group" "asg" {
+  name = "${locals.name}-ASG"
+
   min_size                  = 1
   max_size                  = 3
   desired_capacity          = 1
   health_check_grace_period = 300
   health_check_type         = "ELB"
   force_delete              = true
-  vpc_zone_identifier       = var.subnets    
+  vpc_zone_identifier       = var.subnets
 
   launch_template {
      id = aws_launch_template.ec2-launch-temp.id
