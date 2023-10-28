@@ -11,12 +11,12 @@ variable "group_name" {
   default     = "DevOps"
 }
 
-variable "policy_name" {
-  description = "Name of the IAM policy"
-  type        = string
-}
+# variable "policy_name" {
+#   description = "Name of the IAM policy"
+#   type        = string
+# }
 
-variable "policy_document" {
-  description = "IAM policy document"
-  type        = string
-}
+# variable "policy_document" {
+#   description = "IAM policy document"
+#   type        = string
+# }

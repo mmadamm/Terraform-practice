@@ -14,11 +14,11 @@ resource "aws_iam_user_login_profile" "login" {
   user    = aws_iam_user.user.name 
 }
 
-resource "aws_iam_policy" "policy" {
-  name   = var.policy_name
-  policy = var.policy_document
+# resource "aws_iam_policy" "policy" {
+#   name   = var.policy_name
+#   policy = var.policy_document
 
-}
+# }
 
 resource "aws_iam_user_group_membership" "user_group_membership" {
   user   = aws_iam_user.user.name

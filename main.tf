@@ -5,8 +5,13 @@ provider "aws" {
 
 data "aws_availability_zones" "azs" {
     state = "available"
-
 }
+
+locals {
+  name="fawry-dev"
+}
+
+
 
 
 module "iam" {
