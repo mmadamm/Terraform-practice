@@ -14,6 +14,10 @@ variable "vpc-id" {
   type = string
 }
 
+variable "efs_dns_name" {
+  type = string
+  
+}
 
 
 #security group variables 

@@ -23,6 +23,13 @@ resource "aws_security_group" "launch-security_group" {
   }
 }
 
+data "template_file" "user_data_template" {
+  template = file("${path.module}/user-data.tpl")
+
+  vars = {
+    efs_dns_name = var.efs_dns_name
+  }
+}
 
 
 #luanch template 
@@ -32,9 +39,9 @@ resource "aws_launch_template" "ec2-launch-temp" {
     instance_initiated_shutdown_behavior = "terminate"
     vpc_security_group_ids  = [aws_security_group.launch-security_group.id]
 
+    user_data = base64encode(data.template_file.user_data_template.rendered) 
+  
 }
-
-
 
 # Auta scaling group 
 
