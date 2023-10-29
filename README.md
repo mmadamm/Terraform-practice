@@ -18,11 +18,11 @@ Every user input variable has it's default value that you can override it but as
   terraform apply 
 ```
     
-## VPC Architecture 
+##  The Default VPC Architecture 
 
 ![](assets/images/vpc.png)
 
 
-## subnets
+##  The Default subnets Cider Blocks 
 
 ![](assets/images/subnets.png)
