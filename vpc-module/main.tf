@@ -8,7 +8,7 @@ resource "aws_vpc" "my-app" {
     cidr_block              = var.vpc-cider
     enable_dns_support      = true
     enable_dns_hostnames    = true
-  
+
 }
 #=========================================================#
 

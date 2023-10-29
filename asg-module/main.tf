@@ -53,9 +53,9 @@ resource "aws_launch_template" "ec2-launch-temp" {
 resource "aws_autoscaling_group" "asg" {
 
 
-  min_size                  = 1
-  max_size                  = 3
-  desired_capacity          = 1
+  min_size                  = var.min_size
+  max_size                  = var.max_size
+  desired_capacity          = var.desired_capacity
   health_check_grace_period = 300
   health_check_type         = "ELB"
   force_delete              = true

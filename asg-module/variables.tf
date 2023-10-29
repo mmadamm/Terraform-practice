@@ -2,19 +2,24 @@
 #luanch template variables
 
 variable "instance_type" {
+  description = "inctance type"
   type = string
   default = "t2.micro"
+
 }
 variable "image_id" {
+  description = "image id ,each region have its own ami id "
   type = string
   default = "ami-0dbc3d7bc646e8516"
 }
 
 variable "vpc-id" {
+  description = "static value for this project but you can ovverrid it "
   type = string
 }
 
 variable "efs_dns_name" {
+  description = "static value for this project but you can ovverrid it "
   type = string
   
 }
@@ -52,13 +57,33 @@ variable "ingress_ports" {
 #autoscaling group variables
 
 variable "azs" {
+  description = "static value for this project but you can ovverrid it "
   type = list(string)
 }
 
 variable "subnets" {
+  description = "static value for this project but you can ovverrid it "
   type = list(string)
   
 }
+variable "min_size" {
+ description = "minimum size of the ec2"
+ type=number 
+ default = 1
+}
+
+variable "max_size" {
+ description = "max size of the ec2" 
+ type=number
+ default = 3 
+}
+
+variable "desired_capacity" {
+ description = "desired size of the ec2"  
+ type=number
+ default = 2 
+}
+
 
 
 
