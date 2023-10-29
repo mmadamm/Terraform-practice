@@ -27,9 +27,9 @@ resource "aws_security_group" "efs_security_group" {
 
 resource "aws_efs_file_system" "efs" {
   creation_token         = "my-efs"
-  performance_mode       = "generalPurpose"
-  throughput_mode        = "bursting"
-  encrypted              = true
+  performance_mode       = var.performance_mode
+  throughput_mode        = var.throughput_mode
+  encrypted              = var.encryption
  
 }
 #===========================================================#
