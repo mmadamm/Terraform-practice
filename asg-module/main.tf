@@ -21,12 +21,9 @@ resource "aws_security_group" "launch-security_group" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-
-
-  tags = {
-      name="${locals.name}-ec2-SG"
-    }
+ 
 }
+#script file to run at the ec2 
 
 data "template_file" "user_data_template" {
   template = file("${path.module}/user-data.tpl")
@@ -35,6 +32,7 @@ data "template_file" "user_data_template" {
     efs_dns_name = var.efs_dns_name
   }
 }
+#=============================================================#
 
 
 #luanch template 
@@ -46,16 +44,14 @@ resource "aws_launch_template" "ec2-launch-temp" {
 
     user_data = base64encode(data.template_file.user_data_template.rendered) 
 
-    tags = {
-      name="${locals.name}-luanch-template"
-    }
   
 }
+#=============================================================#
 
 # Auto scaling group 
 
 resource "aws_autoscaling_group" "asg" {
-  name = "${locals.name}-ASG"
+
 
   min_size                  = 1
   max_size                  = 3
@@ -69,3 +65,4 @@ resource "aws_autoscaling_group" "asg" {
      id = aws_launch_template.ec2-launch-temp.id
   }
 }
+#==============================================================#

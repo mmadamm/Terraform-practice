@@ -18,6 +18,7 @@ variable "efs_dns_name" {
   type = string
   
 }
+#===================================================================#
 
 
 #security group variables 
@@ -45,6 +46,7 @@ variable "ingress_ports" {
     # Add more port configurations as needed
   ]
 }
+#===================================================================#
 
 
 #autoscaling group variables
