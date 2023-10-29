@@ -23,15 +23,7 @@ resource "aws_security_group" "launch-security_group" {
   }
  tags = var.tags
 }
-#script file to run at the ec2 
 
-data "template_file" "user_data_template" {
-  template = file("${path.module}/user-data.tpl")
-
-  vars = {
-    efs_dns_name = var.efs_dns_name
-  }
-}
 #=============================================================#
 
 
@@ -41,8 +33,20 @@ resource "aws_launch_template" "ec2-launch-temp" {
     image_id                = var.image_id
     instance_initiated_shutdown_behavior = "terminate"
     vpc_security_group_ids  = [aws_security_group.launch-security_group.id]
+  
+    
+    user_data = base64encode(<<-EOF
+        #!/bin/bash
+        EFS_FILE_SYSTEM_ID="${var.efs_dns_name}"
+        MOUNT_DIR="/mnt/efs"
+        sudo yum -y install nfs-utils
+        sudo service nfs-server start
+        sudo mkdir -p $MOUNT_DIR
+        sudo mount -t nfs -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2 $EFS_FILE_SYSTEM_ID:/ $MOUNT_DIR
+        sudo chmod go+rw $MOUNT_DIR
+EOF
+)
 
-    user_data = base64encode(data.template_file.user_data_template.rendered) 
 
    tags = var.tags
 

@@ -57,6 +57,7 @@ module "efs" {
 
 module "asg" {
   source = "./asg-module"
+  depends_on = [module.efs]
 
   #static variables:    #dont change them if you want to run this project
   vpc-id       = module.vpc.vpc_id
