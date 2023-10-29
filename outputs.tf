@@ -15,3 +15,7 @@ output "passs" {
   
 }
 
+output "aws_autoscaling_group" {
+  value = module.asg.aws_autoscaling_group  
+}
+

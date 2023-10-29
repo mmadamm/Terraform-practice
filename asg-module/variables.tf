@@ -84,6 +84,15 @@ variable "desired_capacity" {
  default = 2 
 }
 
+#tags
 
+variable "tags" {
+  description = "Tags to apply to ASG resources"
+  type        = map(string)
+  default     = {
+        company="fawry"
+        team   ="devops"
+  }
+}
 
 

@@ -18,4 +18,18 @@ variable "map_public_ip_on_launch" {
     type        = bool
     default     = true
 }
+
+
+#tags
+
+variable "tags" {
+  description = "Tags to apply to ASG resources"
+  type        = map(string)
+  default     = {
+        company="fawry"
+        team   ="devops"
+  }
+}
+
+
 #=======================================================#

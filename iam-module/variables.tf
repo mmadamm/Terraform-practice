@@ -20,3 +20,13 @@ variable "group_name" {
 #   description = "IAM policy document"
 #   type        = string
 # }
+
+
+variable "tags" {
+  description = "Tags to apply to IAM resources"
+  type        = map(string)
+  default     = {
+        company="fawry"
+        team   ="devops"
+  }
+}

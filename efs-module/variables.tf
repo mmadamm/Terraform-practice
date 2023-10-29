@@ -32,3 +32,15 @@ variable "encryption" {
   
 }
 
+
+#tags
+
+variable "tags" {
+  description = "Tags to apply to EFS resources"
+  type        = map(string)
+  default     = {
+        company="fawry"
+        team   ="devops"
+  }
+}
+

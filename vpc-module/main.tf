@@ -8,12 +8,16 @@ resource "aws_vpc" "my-app" {
     cidr_block              = var.vpc-cider
     enable_dns_support      = true
     enable_dns_hostnames    = true
+    tags = var.tags
+
 
 }
 #=========================================================#
 
 resource "aws_internet_gateway" "igw" {
     vpc_id = aws_vpc.my-app.id
+      tags = var.tags
+
 
    
 }
@@ -25,6 +29,12 @@ resource "aws_subnet" "subnets" {
     cidr_block              = element(var.public_subnets_cidr_blocks, count.index)
     availability_zone       = element(data.aws_availability_zones.azs.names, count.index)
     map_public_ip_on_launch = var.map_public_ip_on_launch
+
+      tags = {
+          Name = "Public Subnet ${count.index + 1}"
+        }
+      
+
      
 
 }
@@ -32,6 +42,8 @@ resource "aws_subnet" "subnets" {
 
 resource "aws_route_table" "route_table" {
   vpc_id = aws_vpc.my-app.id
+    tags = var.tags
+
 
 
 }

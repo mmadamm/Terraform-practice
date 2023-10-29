@@ -21,7 +21,7 @@ resource "aws_security_group" "launch-security_group" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
- 
+ tags = var.tags
 }
 #script file to run at the ec2 
 
@@ -44,7 +44,8 @@ resource "aws_launch_template" "ec2-launch-temp" {
 
     user_data = base64encode(data.template_file.user_data_template.rendered) 
 
-  
+   tags = var.tags
+
 }
 #=============================================================#
 
@@ -52,7 +53,7 @@ resource "aws_launch_template" "ec2-launch-temp" {
 
 resource "aws_autoscaling_group" "asg" {
 
-
+  name                      = var.tags.company
   min_size                  = var.min_size
   max_size                  = var.max_size
   desired_capacity          = var.desired_capacity
@@ -64,5 +65,6 @@ resource "aws_autoscaling_group" "asg" {
   launch_template {
      id = aws_launch_template.ec2-launch-temp.id
   }
+
 }
 #==============================================================#
